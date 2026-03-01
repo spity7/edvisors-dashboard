@@ -17,7 +17,7 @@ const CertsList = () => {
         const data = await getAllCerts()
         setCertsList(data)
       } catch (error) {
-        console.error('Error fetching certs:', error)
+        console.error('Error fetching certificates:', error)
       }
     }
     fetchCerts()
@@ -25,8 +25,8 @@ const CertsList = () => {
 
   return (
     <>
-      <PageMetaData title="Certs List" />
-      <PageBreadcrumb title="Certs List" subName="Edvisors" />
+      <PageMetaData title="Certificates List" />
+      <PageBreadcrumb title="Certificates List" subName="Edvisors" />
       <Row>
         <Col>
           <Card>
@@ -41,12 +41,12 @@ const CertsList = () => {
                 <div>
                   <Link to="/ecommerce/certs/create" className="btn btn-primary d-flex align-items-center">
                     <IconifyIcon icon="bx:plus" className="me-1" />
-                    Create Cert
+                    Create Certificate
                   </Link>
                 </div>
               </div>
             </CardBody>
-            <div>{certsList.length > 0 ? <CertsListTable certs={certsList} /> : <div className="text-center p-4">No Certs Found</div>}</div>
+            <div>{certsList.length > 0 ? <CertsListTable certs={certsList} /> : <div className="text-center p-4">No Certificates Found</div>}</div>
           </Card>
         </Col>
       </Row>

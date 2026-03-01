@@ -19,6 +19,7 @@ const EcommerceStudentProjectUpdate = lazy(() => import('@/app/(admin)/ecommerce
 const EcommerceCerts = lazy(() => import('@/app/(admin)/ecommerce/certs/page'))
 const EcommerceCertCreate = lazy(() => import('@/app/(admin)/ecommerce/certs/create/page'))
 const EcommerceCertUpdate = lazy(() => import('@/app/(admin)/ecommerce/certs/edit/[id]/page'))
+const CertificatePublicPage = lazy(() => import('@/app/(other)/certificates/[id]/page'))
 
 const EcommerceCompetitions = lazy(() => import('@/app/(admin)/ecommerce/competitions/page'))
 const EcommerceCompetitionCreate = lazy(() => import('@/app/(admin)/ecommerce/competitions/create/page'))
@@ -804,6 +805,13 @@ export const authRoutes = [
     name: 'Verify Email',
     path: '/auth/verify-email',
     element: <AuthVerifyEmail />,
+  },
+]
+export const publicRoutes = [
+  {
+    name: 'Certificate Public View',
+    path: '/certificates/:id',
+    element: <CertificatePublicPage />,
   },
 ]
 export const appRoutes = [

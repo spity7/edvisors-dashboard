@@ -85,12 +85,12 @@ exports.createCert = async (req, res) => {
       thumbnailUrl,
     });
 
-    // Generate QR code composited on the image (encode cert _id as unique text)
+    // Generate QR code composited on the image (encode full public certificate URL)
     try {
-      const qrText = newCert._id.toString();
+      const certPublicUrl = `https://edvisors.ai/certificates/${newCert._id.toString()}`;
       const compositedBuffer = await compositeQRCode(
         thumbnailFile.buffer,
-        qrText,
+        certPublicUrl,
       );
 
       const qrFileName = `certificates/qr/${Date.now()}_qr_${thumbnailFile.originalname.replace(/\.[^.]+$/, "")}.png`;

@@ -57,11 +57,11 @@ app.use(securityHeaders);
 
 // Routes
 app.use("/api/v1", userRoutes);
-app.use("/api/v1", serviceRoutes);
-app.use("/api/v1", projectRoutes);
-app.use("/api/v1", competitionRoutes);
-app.use("/api/v1", aiToolsRoutes);
-app.use("/api/v1", officeRoutes);
+// app.use("/api/v1", serviceRoutes);
+// app.use("/api/v1", projectRoutes);
+// app.use("/api/v1", competitionRoutes);
+// app.use("/api/v1", aiToolsRoutes);
+// app.use("/api/v1", officeRoutes);
 app.use("/api/v1", certRoutes);
 
 // app.use("/api/v1", propertyRoutes);

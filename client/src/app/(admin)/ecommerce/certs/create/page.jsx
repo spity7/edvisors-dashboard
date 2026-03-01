@@ -6,8 +6,8 @@ import PageMetaData from '@/components/PageTitle'
 const CreateCert = () => {
   return (
     <>
-      <PageBreadcrumb title="Create Cert" subName="Edvisors" />
-      <PageMetaData title="Create Cert" />
+      <PageBreadcrumb title="Create Certificate" subName="Edvisors" />
+      <PageMetaData title="Create Certificate" />
 
       <Row>
         <Col>

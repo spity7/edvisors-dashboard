@@ -13,7 +13,7 @@ import DropzoneFormInput from '@/components/form/DropzoneFormInput'
 import ComponentContainerCard from '@/components/ComponentContainerCard'
 
 const generalFormSchema = yup.object({
-  descQuill: yup.string().required('Cert description is required'),
+  descQuill: yup.string().required('Certificate description is required'),
 })
 
 const normalizeQuillValue = (value) => {
@@ -54,7 +54,7 @@ const GeneralDetailsForm = () => {
 
       await createCert(formData)
 
-      alert('Cert created successfully!')
+      alert('Certificate created successfully!')
 
       // ✅ Clear all form fields properly
       reset({
@@ -65,7 +65,7 @@ const GeneralDetailsForm = () => {
       setResetDropzones(true)
       setTimeout(() => setResetDropzones(false), 0) // reset flag
     } catch (error) {
-      alert(error?.response?.data?.message || '❌ Failed to create cert')
+      alert(error?.response?.data?.message || '❌ Failed to create certificate')
     } finally {
       setLoading(false)
     }
@@ -143,7 +143,7 @@ const GeneralDetailsForm = () => {
       </Row>
 
       <Button type="submit" disabled={loading} className="mt-4">
-        {loading ? 'Creating...' : 'Create Cert'}
+        {loading ? 'Creating...' : 'Create Certificate'}
       </Button>
     </form>
   )
