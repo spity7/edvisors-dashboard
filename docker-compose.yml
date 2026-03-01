@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: ./client
+    ports:
+      - "3020:80"
+    restart: always
+
+  server:
+    build:
+      context: ./server
+    ports:
+      - "5020:5020"
+    env_file:
+      - ./server/.env
+    restart: always
