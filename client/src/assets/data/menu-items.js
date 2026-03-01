@@ -45,6 +45,12 @@ export const MENU_ITEMS = [
         url: '/ecommerce/offices',
         parentKey: 'ecommerce',
       },
+      {
+        key: 'ecommerce-certs',
+        label: 'Certs',
+        url: '/ecommerce/certs',
+        parentKey: 'ecommerce',
+      },
 
       // {
       //   key: 'ecommerce-products',

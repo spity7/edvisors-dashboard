@@ -1,19 +1,22 @@
-import useToggle from '@/hooks/useToggle';
-import { useState } from 'react';
-import { Button, Col, Form, Row, Toast, ToastBody, ToastContainer, ToastHeader } from 'react-bootstrap';
-import ReactSelect from 'react-select';
-import logoDark from '@/assets/images/logo-dark.png';
-import logoLight from '@/assets/images/logo-light.png';
-import ComponentContainerCard from '@/components/ComponentContainerCard';
+import useToggle from '@/hooks/useToggle'
+import { useState } from 'react'
+import { Button, Col, Form, Row, Toast, ToastBody, ToastContainer, ToastHeader } from 'react-bootstrap'
+import ReactSelect from 'react-select'
+import logoDark from '@/assets/images/Logo Edvisors - black.png'
+import logoLight from '@/assets/images/Logo Edvisors - white.png'
+import ComponentContainerCard from '@/components/ComponentContainerCard'
 const BasicToast = () => {
-  const {
-    isTrue: isOpen,
-    toggle: hide
-  } = useToggle();
-  return <ComponentContainerCard id="basic_examples" title="Basic Examples" description={<>
+  const { isTrue: isOpen, toggle: hide } = useToggle()
+  return (
+    <ComponentContainerCard
+      id="basic_examples"
+      title="Basic Examples"
+      description={
+        <>
           Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted”
           content and strongly encourage a dismiss button.
-        </>}>
+        </>
+      }>
       <Toast className="fade d-block opacity-100" role="alert" onClose={hide} show={!isOpen}>
         <ToastHeader closeButton>
           <div className="auth-logo d-inline-block me-auto">
@@ -26,14 +29,18 @@ const BasicToast = () => {
         </ToastHeader>
         <ToastBody>Hello, world! This is a toast message.</ToastBody>
       </Toast>
-    </ComponentContainerCard>;
-};
+    </ComponentContainerCard>
+  )
+}
 const LiveExample = () => {
-  const {
-    isTrue: isOpen,
-    toggle
-  } = useToggle();
-  return <ComponentContainerCard id="live_example" title="Live example" description={<>Click the button below to show a toast (positioned with our utilities in the lower right corner) that has been hidden by default.</>}>
+  const { isTrue: isOpen, toggle } = useToggle()
+  return (
+    <ComponentContainerCard
+      id="live_example"
+      title="Live example"
+      description={
+        <>Click the button below to show a toast (positioned with our utilities in the lower right corner) that has been hidden by default.</>
+      }>
       <Button variant="primary" onClick={toggle} type="button" id="liveToastDefaultBtn">
         Show live toast
       </Button>
@@ -49,22 +56,23 @@ const LiveExample = () => {
           <ToastBody>Hello, world! This is a toast message.</ToastBody>
         </Toast>
       </div>
-    </ComponentContainerCard>;
-};
+    </ComponentContainerCard>
+  )
+}
 const StackingToast = () => {
-  const {
-    isTrue: isOpenToast1,
-    toggle: toggleToast1
-  } = useToggle();
-  const {
-    isTrue: isOpenToast2,
-    toggle: toggleToast2
-  } = useToggle();
-  return <ComponentContainerCard id="default_buttons" title="Default Buttons" description={<>
+  const { isTrue: isOpenToast1, toggle: toggleToast1 } = useToggle()
+  const { isTrue: isOpenToast2, toggle: toggleToast2 } = useToggle()
+  return (
+    <ComponentContainerCard
+      id="default_buttons"
+      title="Default Buttons"
+      description={
+        <>
           {' '}
           Toasts are as flexible as you need and have very little required markup. At a minimum, we require a single element to contain your “toasted”
           content and strongly encourage a dismiss button.
-        </>}>
+        </>
+      }>
       <Button type="button" className="me-1" variant="primary" onClick={toggleToast1}>
         Show live toast
       </Button>
@@ -93,26 +101,19 @@ const StackingToast = () => {
           <ToastBody>Heads up, toasts will stack automatically</ToastBody>
         </Toast>
       </ToastContainer>
-    </ComponentContainerCard>;
-};
+    </ComponentContainerCard>
+  )
+}
 const CustomToast = () => {
-  const {
-    isTrue: isOpenCustom1,
-    setFalse: hideCustom1
-  } = useToggle(true);
-  const {
-    isTrue: isOpenCustom2,
-    setFalse: hideCustom2
-  } = useToggle(true);
-  const {
-    isTrue: isOpenCustom3,
-    setFalse: hideCustom3
-  } = useToggle(true);
-  const {
-    isTrue: isOpenCustom4,
-    setFalse: hideCustom4
-  } = useToggle(true);
-  return <ComponentContainerCard id="custom_content" title="Custom Content" description={<> Alternatively, you can also add additional controls and components to toasts.</>}>
+  const { isTrue: isOpenCustom1, setFalse: hideCustom1 } = useToggle(true)
+  const { isTrue: isOpenCustom2, setFalse: hideCustom2 } = useToggle(true)
+  const { isTrue: isOpenCustom3, setFalse: hideCustom3 } = useToggle(true)
+  const { isTrue: isOpenCustom4, setFalse: hideCustom4 } = useToggle(true)
+  return (
+    <ComponentContainerCard
+      id="custom_content"
+      title="Custom Content"
+      description={<> Alternatively, you can also add additional controls and components to toasts.</>}>
       <Row>
         <Col md={6}>
           <Toast className="align-items-center mb-3 fade" show={isOpenCustom1} onClose={hideCustom1} delay={3000} autohide>
@@ -163,17 +164,21 @@ const CustomToast = () => {
           </Toast>
         </Col>
       </Row>
-    </ComponentContainerCard>;
-};
+    </ComponentContainerCard>
+  )
+}
 const TranslucentToast = () => {
-  const {
-    isTrue: isOpenTranslucent,
-    toggle: hideTranslucent
-  } = useToggle(true);
-  return <ComponentContainerCard id="pranscluentPlacement" title="Transcluent" description={<>
+  const { isTrue: isOpenTranslucent, toggle: hideTranslucent } = useToggle(true)
+  return (
+    <ComponentContainerCard
+      id="pranscluentPlacement"
+      title="Transcluent"
+      description={
+        <>
           Toasts are slightly translucent, too, so they blend over whatever they might appear over. For browsers that support the backdrop-filter CSS
           property, we’ll also attempt to blur the elements under a toast.
-        </>}>
+        </>
+      }>
       <div className="p-3 bg-light">
         <Toast onClose={hideTranslucent} autohide delay={8000} show={isOpenTranslucent} className="fade" role="alert">
           <ToastHeader closeButton>
@@ -188,17 +193,28 @@ const TranslucentToast = () => {
           <ToastBody>Hello, world! This is a toast message.</ToastBody>
         </Toast>
       </div>
-    </ComponentContainerCard>;
-};
+    </ComponentContainerCard>
+  )
+}
 const PlacementToast = () => {
-  const [position, setPosition] = useState('top-start');
-  return <ComponentContainerCard id="placement" title="Placement" description={<>
+  const [position, setPosition] = useState('top-start')
+  return (
+    <ComponentContainerCard
+      id="placement"
+      title="Placement"
+      description={
+        <>
           Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. If you’re only ever
           going to show one toast at a time, put the positioning styles right on the <code>.toast.</code>
-        </>}>
-      <div aria-live="polite" aria-atomic="true" className="bg-light position-relative" style={{
-      minHeight: 350
-    }}>
+        </>
+      }>
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="bg-light position-relative"
+        style={{
+          minHeight: 350,
+        }}>
         <ToastContainer position={position} className="position-absolute p-3" id="toastPlacement">
           <Toast className="mb-2">
             <ToastHeader closeButton>
@@ -219,46 +235,62 @@ const PlacementToast = () => {
           <label htmlFor="selectToastPlacement" className="form-label">
             Toast placement
           </label>
-          <ReactSelect className="mt-2" onChange={e => setPosition(e?.value)} options={[{
-          value: 'top-start',
-          label: 'Top Start'
-        }, {
-          value: 'top-center',
-          label: 'Top Center'
-        }, {
-          value: 'top-end',
-          label: 'Top End'
-        }, {
-          value: 'middle-start',
-          label: 'Middle Start'
-        }, {
-          value: 'middle-center',
-          label: 'Middle Center'
-        }, {
-          value: 'middle-end',
-          label: 'Middle End'
-        }, {
-          value: 'bottom-start',
-          label: 'Bottom Start'
-        }, {
-          value: 'bottom-center',
-          label: 'Bottom Center'
-        }, {
-          value: 'bottom-end',
-          label: 'Bottom End'
-        }]}></ReactSelect>
+          <ReactSelect
+            className="mt-2"
+            onChange={(e) => setPosition(e?.value)}
+            options={[
+              {
+                value: 'top-start',
+                label: 'Top Start',
+              },
+              {
+                value: 'top-center',
+                label: 'Top Center',
+              },
+              {
+                value: 'top-end',
+                label: 'Top End',
+              },
+              {
+                value: 'middle-start',
+                label: 'Middle Start',
+              },
+              {
+                value: 'middle-center',
+                label: 'Middle Center',
+              },
+              {
+                value: 'middle-end',
+                label: 'Middle End',
+              },
+              {
+                value: 'bottom-start',
+                label: 'Bottom Start',
+              },
+              {
+                value: 'bottom-center',
+                label: 'Bottom Center',
+              },
+              {
+                value: 'bottom-end',
+                label: 'Bottom End',
+              },
+            ]}></ReactSelect>
         </div>
       </Form>
-    </ComponentContainerCard>;
-};
+    </ComponentContainerCard>
+  )
+}
 const AllToasts = () => {
-  return <>
+  return (
+    <>
       <BasicToast />
       <LiveExample />
       <StackingToast />
       <CustomToast />
       <TranslucentToast />
       <PlacementToast />
-    </>;
-};
-export default AllToasts;
+    </>
+  )
+}
+export default AllToasts

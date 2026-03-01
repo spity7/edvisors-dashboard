@@ -199,6 +199,42 @@ export const GlobalProvider = ({ children }) => {
     return response.data
   }
 
+  const createCert = async (data) => {
+    const response = await axiosInstance.post('/certs', data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data
+  }
+
+  const getAllCerts = async () => {
+    const response = await axiosInstance.get('/certs')
+    return response.data.certs
+  }
+
+  const getCertById = async (id) => {
+    const response = await axiosInstance.get(`/certs/${id}`)
+    return response.data.cert
+  }
+
+  const updateCert = async (id, data) => {
+    const response = await axiosInstance.put(`/certs/${id}`, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response.data.cert
+  }
+
+  const deleteCert = async (id) => {
+    const response = await axiosInstance.delete(`/certs/${id}`)
+    return response.data
+  }
+
+  const deleteCertGalleryImage = async (id, imageUrl) => {
+    const response = await axiosInstance.delete(`/certs/${id}/gallery`, {
+      data: { imageUrl },
+    })
+    return response.data
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -231,6 +267,12 @@ export const GlobalProvider = ({ children }) => {
         updateOffice,
         deleteOffice,
         deleteOfficeGalleryImage,
+        createCert,
+        getAllCerts,
+        getCertById,
+        updateCert,
+        deleteCert,
+        deleteCertGalleryImage,
       }}>
       {children}
     </GlobalContext.Provider>

@@ -1,12 +1,13 @@
-import { Card, CardBody, Col } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import PageMetaData from '@/components/PageTitle';
-import Timer from './components/Timer';
-import logoDark from '@/assets/images/logo-dark.png';
-import logoLight from '@/assets/images/logo-light.png';
-import logoSm from '@/assets/images/logo-sm.png';
+import { Card, CardBody, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import PageMetaData from '@/components/PageTitle'
+import Timer from './components/Timer'
+import logoDark from '@/assets/images/Logo Edvisors - black.png'
+import logoLight from '@/assets/images/Logo Edvisors - white.png'
+import logoSm from '@/assets/images/logo-sm.png'
 const ComingSoon = () => {
-  return <>
+  return (
+    <>
       <PageMetaData title="Coming Soon" />
 
       <Col lg={10} className="mx-auto">
@@ -34,6 +35,7 @@ const ComingSoon = () => {
           </CardBody>
         </Card>
       </Col>
-    </>;
-};
-export default ComingSoon;
+    </>
+  )
+}
+export default ComingSoon

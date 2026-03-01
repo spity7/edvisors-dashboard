@@ -23,7 +23,7 @@ const SignUp = () => {
                 <LogoBox
                   textLogo={{
                     height: 80,
-                    width: 120,
+                    width: 180,
                   }}
                   squareLogo={{
                     className: 'me-1',

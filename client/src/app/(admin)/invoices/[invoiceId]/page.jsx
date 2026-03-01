@@ -1,33 +1,34 @@
-import { useEffect, useState } from 'react';
-import { Card, CardBody, CardTitle, Col, Row } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getInvoiceById } from '@/helpers/data';
-import PageBreadcrumb from '@/components/layout/PageBreadcrumb';
-import { currency } from '@/context/constants';
-import SubmissionButton from './components/SubmissionButton';
-import PageMetaData from '@/components/PageTitle';
-import logoDark from '@/assets/images/logo-dark.png';
+import { useEffect, useState } from 'react'
+import { Card, CardBody, CardTitle, Col, Row } from 'react-bootstrap'
+import { useNavigate, useParams } from 'react-router-dom'
+import { getInvoiceById } from '@/helpers/data'
+import PageBreadcrumb from '@/components/layout/PageBreadcrumb'
+import { currency } from '@/context/constants'
+import SubmissionButton from './components/SubmissionButton'
+import PageMetaData from '@/components/PageTitle'
+import logoDark from '@/assets/images/Logo Edvisors - black.png'
 const InvoiceDetail = () => {
-  const [invoice, setInvoice] = useState();
-  const {
-    invoiceId
-  } = useParams();
-  const navigate = useNavigate();
+  const [invoice, setInvoice] = useState()
+  const { invoiceId } = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (invoiceId) {
-        const data = await getInvoiceById(invoiceId);
-        if (data) setInvoice(data);else navigate('/pages/error-404-alt');
+        const data = await getInvoiceById(invoiceId)
+        if (data) setInvoice(data)
+        else navigate('/pages/error-404-alt')
       }
-    })();
-  }, []);
-  return <>
+    })()
+  }, [])
+  return (
+    <>
       <PageBreadcrumb subName="Invoice" title={invoice?.id ?? 'Invoice Details'} />
       <PageMetaData title={invoice?.id ?? 'Invoice Details'} />
 
       <Row>
         <Col xs={12}>
-          {invoice && <Card>
+          {invoice && (
+            <Card>
               <CardBody>
                 <div className="clearfix">
                   <div className="float-sm-end">
@@ -135,9 +136,11 @@ const InvoiceDetail = () => {
                   <SubmissionButton />
                 </div>
               </CardBody>
-            </Card>}
+            </Card>
+          )}
         </Col>
       </Row>
-    </>;
-};
-export default InvoiceDetail;
+    </>
+  )
+}
+export default InvoiceDetail

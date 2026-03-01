@@ -10,6 +10,7 @@ const csp = require("./middlewares/csp");
 const userRoutes = require("./routes/userRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const certRoutes = require("./routes/certRoutes");
 const competitionRoutes = require("./routes/competitionRoutes");
 const aiToolsRoutes = require("./routes/aiToolsRoutes");
 const officeRoutes = require("./routes/officeRoutes");
@@ -61,6 +62,8 @@ app.use("/api/v1", projectRoutes);
 app.use("/api/v1", competitionRoutes);
 app.use("/api/v1", aiToolsRoutes);
 app.use("/api/v1", officeRoutes);
+app.use("/api/v1", certRoutes);
+
 // app.use("/api/v1", propertyRoutes);
 
 // errorhandling for Middleware

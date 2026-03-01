@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import logoDark from '@/assets/images/logo-dark.png'
-import logoLight from '@/assets/images/logo-light.png'
+import logoDark from '@/assets/images/Logo Edvisors - black.png'
+import logoLight from '@/assets/images/Logo Edvisors - white.png'
 import logoSm from '@/assets/images/logo-sm.png'
 
 const LogoBox = ({ containerClassName, squareLogo, textLogo }) => {
