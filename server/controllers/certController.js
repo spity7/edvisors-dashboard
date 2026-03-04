@@ -87,7 +87,7 @@ exports.createCert = async (req, res) => {
 
     // Generate QR code composited on the image (encode full public certificate URL)
     try {
-      const certPublicUrl = `https://edvisors.ai/certificates/${newCert._id.toString()}`;
+      const certPublicUrl = `https://dashboard.edvisors.ai/certificates/${newCert._id.toString()}`;
       const compositedBuffer = await compositeQRCode(
         thumbnailFile.buffer,
         certPublicUrl,
