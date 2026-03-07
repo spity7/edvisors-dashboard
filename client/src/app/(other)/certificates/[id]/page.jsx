@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import logoDark from '@/assets/images/USAAC certificate-03-03.png'
 
-const BASE_URL = 'http://localhost:5020/api/v1'
-// const BASE_URL = 'https://api.edvisors.ai/api/v1/'
+// const BASE_URL = 'http://localhost:5020/api/v1'
+const BASE_URL = 'https://api.edvisors.ai/api/v1/'
 
 const CertificatePublicPage = () => {
   const { id } = useParams()
