@@ -8,6 +8,7 @@ const {
   updateCert,
   deleteCert,
   deleteCertImage,
+  downloadCert,
 } = require("../controllers/certController");
 
 const upload = multer({
@@ -23,6 +24,7 @@ router.post(
   upload.fields([{ name: "thumbnail", maxCount: 1 }]),
   createCert,
 );
+router.get("/certs/download", downloadCert);
 router.get("/certs", getAllCerts);
 router.get("/certs/:id", getCertById);
 router.put(

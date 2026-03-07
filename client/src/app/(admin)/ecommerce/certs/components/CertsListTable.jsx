@@ -5,25 +5,15 @@ import IconifyIcon from '@/components/wrappers/IconifyIcon'
 import { useGlobalContext } from '@/context/useGlobalContext'
 import Swal from 'sweetalert2'
 
+const BASE_URL = 'http://localhost:5020/api/v1'
+// const BASE_URL = 'https://api.edvisors.ai/api/v1/'
+
 /* ─── Lightbox Modal ─────────────────────────────────────────── */
 const ImagePreviewModal = ({ image, onClose }) => {
   if (!image) return null
 
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(image.url)
-      const blob = await response.blob()
-      const blobUrl = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = blobUrl
-      a.download = image.filename
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      URL.revokeObjectURL(blobUrl)
-    } catch {
-      window.open(image.url, '_blank')
-    }
+  const handleDownload = () => {
+    window.location.href = `${BASE_URL}/certs/download?url=${encodeURIComponent(image.url)}&filename=${encodeURIComponent(image.filename)}`
   }
 
   return (

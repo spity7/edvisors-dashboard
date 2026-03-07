@@ -42,9 +42,9 @@ async function compositeQRCode(imageBuffer, qrText) {
     .png()
     .toBuffer();
 
-  // Position: bottom-right corner
-  const left = width - bgSize - padding;
-  const top = height - bgSize - padding;
+  // Position: 75% downward and 15% to the right
+  const left = Math.round(width * 0.15);
+  const top = Math.round(height * 0.75);
 
   // Composite onto original image (convert to PNG output)
   const composited = await sharp(imageBuffer)
@@ -87,7 +87,8 @@ exports.createCert = async (req, res) => {
 
     // Generate QR code composited on the image (encode full public certificate URL)
     try {
-      const certPublicUrl = `https://dashboard.edvisors.ai/certificates/${newCert._id.toString()}`;
+      // const certPublicUrl = `https://dashboard.edvisors.ai/certificates/${newCert._id.toString()}`;
+      const certPublicUrl = `http://localhost:5173/certificates/${newCert._id.toString()}`;
       const compositedBuffer = await compositeQRCode(
         thumbnailFile.buffer,
         certPublicUrl,
@@ -268,5 +269,56 @@ exports.deleteCertImage = async (req, res) => {
       message: "Server error deleting gallery image",
       error: error.message,
     });
+  }
+};
+
+exports.downloadCert = async (req, res) => {
+  try {
+    const { url } = req.query;
+    if (!url) return res.status(400).json({ message: "URL is required" });
+
+    // Limit SSRF
+    if (
+      !url.startsWith("https://storage.googleapis.com/") &&
+      !url.startsWith("http://storage.googleapis.com/")
+    ) {
+      return res.status(400).json({ message: "Invalid URL source" });
+    }
+
+    const https = require("https");
+
+    https
+      .get(url, (response) => {
+        if (response.statusCode >= 400) {
+          return res.status(response.statusCode).json({
+            message: `Failed to download file (Status: ${response.statusCode})`,
+          });
+        }
+
+        const filename =
+          req.query.filename ||
+          url.split("/").pop().split("?")[0] ||
+          "certificate.png";
+
+        res.setHeader(
+          "Content-Type",
+          response.headers["content-type"] || "application/octet-stream",
+        );
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${filename}"`,
+        );
+
+        response.pipe(res);
+      })
+      .on("error", (err) => {
+        console.error("Proxy download error:", err);
+        res.status(500).json({ message: "Error proxying download" });
+      });
+  } catch (error) {
+    console.error("Download endpoint error:", error);
+    res
+      .status(500)
+      .json({ message: "Server error downloading file", error: error.message });
   }
 };

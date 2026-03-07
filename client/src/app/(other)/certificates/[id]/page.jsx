@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import logoDark from '@/assets/images/Logo Edvisors - black.png'
+import logoDark from '@/assets/images/USAAC certificate-03-03.png'
 
-// const BASE_URL = 'http://localhost:5020/api/v1'
-const BASE_URL = 'https://api.edvisors.ai/api/v1/'
+const BASE_URL = 'http://localhost:5020/api/v1'
+// const BASE_URL = 'https://api.edvisors.ai/api/v1/'
 
 const CertificatePublicPage = () => {
   const { id } = useParams()
@@ -27,21 +27,9 @@ const CertificatePublicPage = () => {
     if (id) fetchCert()
   }, [id])
 
-  const handleDownload = async (url, filename) => {
-    try {
-      const response = await fetch(url)
-      const blob = await response.blob()
-      const blobUrl = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = blobUrl
-      a.download = filename
-      document.body.appendChild(a)
-      a.click()
-      a.remove()
-      URL.revokeObjectURL(blobUrl)
-    } catch {
-      window.open(url, '_blank')
-    }
+  const handleDownload = (url, filename) => {
+    // Navigate to the backend download route which forces "Content-Disposition: attachment"
+    window.location.href = `${BASE_URL}/certs/download?url=${encodeURIComponent(url)}&filename=${encodeURIComponent(filename)}`
   }
 
   return (
@@ -80,7 +68,7 @@ const CertificatePublicPage = () => {
 
             {/* Certificate image */}
             <div style={styles.imageWrapper}>
-              <img src={cert.thumbnailUrl} alt="Certificate" style={styles.certImage} />
+              <img src={cert.qrImageUrl || cert.thumbnailUrl} alt="Certificate" style={styles.certImage} />
             </div>
 
             {/* Description */}
@@ -108,7 +96,7 @@ const CertificatePublicPage = () => {
 
             {/* Download buttons */}
             <div style={styles.actions}>
-              <button style={styles.btnPrimary} onClick={() => handleDownload(cert.thumbnailUrl, `certificate-${cert._id}.png`)}>
+              <button style={styles.btnPrimary} onClick={() => handleDownload(cert.thumbnailUrl, `certificate-original-${cert._id}.png`)}>
                 ↓ Download Certificate
               </button>
               {cert.qrImageUrl && (
