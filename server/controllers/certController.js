@@ -15,8 +15,8 @@ async function compositeQRCode(imageBuffer, qrText) {
   const metadata = await image.metadata();
   const { width, height } = metadata;
 
-  // QR size = 20% of the smallest dimension, minimum 80px
-  const qrSize = Math.max(80, Math.round(Math.min(width, height) * 0.2));
+  // QR size = 12% of the smallest dimension, minimum 64px
+  const qrSize = Math.max(64, Math.round(Math.min(width, height) * 0.12));
   const padding = Math.round(qrSize * 0.08); // small padding from the edge
 
   // Generate QR code as a PNG buffer
@@ -42,9 +42,9 @@ async function compositeQRCode(imageBuffer, qrText) {
     .png()
     .toBuffer();
 
-  // Position: 75% downward and 15% to the right
+  // Position: 70% downward and 15% to the right
   const left = Math.round(width * 0.15);
-  const top = Math.round(height * 0.75);
+  const top = Math.round(height * 0.73);
 
   // Composite onto original image (convert to PNG output)
   const composited = await sharp(imageBuffer)
@@ -87,7 +87,7 @@ exports.createCert = async (req, res) => {
 
     // Generate QR code composited on the image (encode full public certificate URL)
     try {
-      const certPublicUrl = `https://dashboard.edvisors.ai/certificates/${newCert._id.toString()}`;
+      const certPublicUrl = `https://dashboard.usaac.us/certificates/${newCert._id.toString()}`;
       // const certPublicUrl = `http://localhost:5173/certificates/${newCert._id.toString()}`;
       const compositedBuffer = await compositeQRCode(
         thumbnailFile.buffer,

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import logoDark from '@/assets/images/USAAC certificate-03-03.png'
 
 // const BASE_URL = 'http://localhost:5020/api/v1'
-const BASE_URL = 'https://api.edvisors.ai/api/v1/'
+const BASE_URL = 'https://api.usaac.us/api/v1/'
 
 const CertificatePublicPage = () => {
   const { id } = useParams()
@@ -112,8 +112,8 @@ const CertificatePublicPage = () => {
       {/* Footer */}
       <footer style={styles.footer}>
         <p>© {new Date().getFullYear()} Edvisors. All rights reserved.</p>
-        <a href="https://edvisors.ai" style={styles.footerLink}>
-          edvisors.ai
+        <a href="https://usaac.us" style={styles.footerLink}>
+          usaac.us
         </a>
       </footer>
 

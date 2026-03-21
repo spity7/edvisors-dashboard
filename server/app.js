@@ -31,9 +31,9 @@ app.use(
       "http://localhost:5173",
       "http://localhost:3000",
       "http://localhost:5020",
-      "https://edvisors.ai",
-      "https://dashboard.edvisors.ai",
-      "https://api.edvisors.ai",
+      "https://usaac.us",
+      "https://dashboard.usaac.us",
+      "https://api.usaac.us",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: [

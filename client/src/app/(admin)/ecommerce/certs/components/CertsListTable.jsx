@@ -6,7 +6,7 @@ import { useGlobalContext } from '@/context/useGlobalContext'
 import Swal from 'sweetalert2'
 
 // const BASE_URL = 'http://localhost:5020/api/v1'
-const BASE_URL = 'https://api.edvisors.ai/api/v1/'
+const BASE_URL = 'https://api.usaac.us/api/v1/'
 
 /* ─── Lightbox Modal ─────────────────────────────────────────── */
 const ImagePreviewModal = ({ image, onClose }) => {
