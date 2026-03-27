@@ -37,7 +37,10 @@ const CertificatePublicPage = () => {
       {/* Header */}
       <header style={styles.header}>
         <img src={logoDark} alt="Edvisors" style={styles.logo} />
-        <span style={styles.headerTitle}>Certificate Verification</span>
+        <div style={styles.verifiedBadge}>
+          <span style={styles.checkmark}>✓</span>
+          <span>Verified Certificate</span>
+        </div>
       </header>
 
       {/* Card */}
@@ -60,10 +63,19 @@ const CertificatePublicPage = () => {
 
         {cert && !loading && (
           <div style={styles.card}>
-            {/* Success badge */}
-            <div style={styles.verifiedBadge}>
-              <span style={styles.checkmark}>✓</span>
-              <span>Verified Certificate</span>
+            {/* Download buttons — QR-first when available */}
+            <div style={styles.actions}>
+              {cert.qrImageUrl && (
+                <button type="button" style={styles.btnQrPrimary} onClick={() => handleDownload(cert.qrImageUrl, `certificate-qr-${cert._id}.png`)}>
+                  ↓ Download with QR Code
+                </button>
+              )}
+              <button
+                type="button"
+                style={cert.qrImageUrl ? styles.btnSecondary : styles.btnPrimary}
+                onClick={() => handleDownload(cert.thumbnailUrl, `certificate-original-${cert._id}.png`)}>
+                ↓ Download Certificate
+              </button>
             </div>
 
             {/* Certificate image */}
@@ -80,30 +92,6 @@ const CertificatePublicPage = () => {
                 <span style={styles.metaLabel}>Certificate ID</span>
                 <span style={styles.metaValue}>{cert._id}</span>
               </div>
-              {cert.createdAt && (
-                <div style={styles.metaItem}>
-                  <span style={styles.metaLabel}>Issued On</span>
-                  <span style={styles.metaValue}>
-                    {new Date(cert.createdAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            {/* Download buttons */}
-            <div style={styles.actions}>
-              <button style={styles.btnPrimary} onClick={() => handleDownload(cert.thumbnailUrl, `certificate-original-${cert._id}.png`)}>
-                ↓ Download Certificate
-              </button>
-              {cert.qrImageUrl && (
-                <button style={styles.btnSecondary} onClick={() => handleDownload(cert.qrImageUrl, `certificate-qr-${cert._id}.png`)}>
-                  ↓ Download with QR
-                </button>
-              )}
             </div>
           </div>
         )}
@@ -111,7 +99,7 @@ const CertificatePublicPage = () => {
 
       {/* Footer */}
       <footer style={styles.footer}>
-        <p>© {new Date().getFullYear()} Edvisors. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Usaac All rights reserved.</p>
         <a href="https://usaac.us" style={styles.footerLink}>
           usaac.us
         </a>
@@ -144,35 +132,39 @@ const styles = {
   header: {
     background: '#fff',
     borderBottom: '1px solid #e8edf5',
-    padding: '16px 32px',
+    padding: '10px 20px',
     display: 'flex',
     alignItems: 'center',
-    gap: 16,
+    justifyContent: 'space-around',
+    gap: 12,
     boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
   },
   logo: {
-    height: 36,
+    height: 32,
     objectFit: 'contain',
   },
   headerTitle: {
-    fontSize: 15,
+    fontSize: 14,
     fontWeight: 600,
     color: '#374151',
     borderLeft: '1px solid #e0e7ef',
-    paddingLeft: 16,
-    marginLeft: 4,
+    paddingLeft: 12,
+    marginLeft: 2,
   },
   main: {
     flex: 1,
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    padding: '48px 16px',
+    justifyContent: 'flex-start',
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: '16px 16px 32px',
   },
   card: {
     background: '#fff',
-    borderRadius: 20,
-    padding: '40px 48px',
+    borderRadius: 16,
+    padding: '22px 24px 26px',
     maxWidth: 640,
     width: '100%',
     boxShadow: '0 8px 40px rgba(0,0,0,0.1)',
@@ -180,17 +172,17 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: 24,
+    gap: 16,
   },
   verifiedBadge: {
     display: 'flex',
     alignItems: 'center',
-    gap: 8,
+    gap: 6,
     background: 'linear-gradient(90deg, #10b981, #059669)',
     color: '#fff',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: 600,
-    padding: '8px 20px',
+    padding: '6px 16px',
     borderRadius: 100,
     boxShadow: '0 4px 12px rgba(16,185,129,0.35)',
   },
@@ -221,10 +213,10 @@ const styles = {
     width: '100%',
     background: '#f8fafc',
     borderRadius: 12,
-    padding: '16px 20px',
+    padding: '12px 16px',
     display: 'flex',
     flexDirection: 'column',
-    gap: 10,
+    gap: 8,
     border: '1px solid #e8edf5',
   },
   metaItem: {
@@ -250,12 +242,28 @@ const styles = {
   },
   actions: {
     display: 'flex',
-    gap: 12,
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    gap: 8,
     width: '100%',
+    maxWidth: 400,
+  },
+  btnQrPrimary: {
+    width: '100%',
+    background: 'linear-gradient(135deg, #4338ca 0%, #6366f1 45%, #818cf8 100%)',
+    color: '#fff',
+    border: 'none',
+    borderRadius: 12,
+    padding: '14px 20px',
+    fontSize: 14,
+    fontWeight: 700,
+    letterSpacing: '0.02em',
+    cursor: 'pointer',
+    boxShadow: '0 8px 24px rgba(67, 56, 202, 0.45), 0 2px 8px rgba(79, 70, 229, 0.25)',
+    transition: 'transform 0.15s ease, box-shadow 0.15s ease',
   },
   btnPrimary: {
+    width: '100%',
     background: 'linear-gradient(135deg, #4f46e5, #6366f1)',
     color: '#fff',
     border: 'none',
@@ -268,11 +276,12 @@ const styles = {
     transition: 'opacity 0.2s',
   },
   btnSecondary: {
+    width: '100%',
     background: '#fff',
     color: '#4f46e5',
     border: '1.5px solid #c7d2fe',
     borderRadius: 10,
-    padding: '12px 28px',
+    padding: '12px 24px',
     fontSize: 14,
     fontWeight: 600,
     cursor: 'pointer',
@@ -316,7 +325,7 @@ const styles = {
   footer: {
     background: '#fff',
     borderTop: '1px solid #e8edf5',
-    padding: '16px 32px',
+    padding: '12px 20px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
